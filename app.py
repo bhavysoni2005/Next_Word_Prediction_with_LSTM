@@ -9,7 +9,7 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 # ------------------------------
 @st.cache_resource
 def load_resources():
-    model = load_model("lstm_model.h5")
+    model = load_model("lstm_model.h5", compile=False)
     with open("tokenizer.pkl", "rb") as f:
         tokenizer = pickle.load(f)
     with open("max_len.pkl", "rb") as f:
@@ -27,7 +27,7 @@ def predict_next_word(text):
     sequence = pad_sequences([sequence], maxlen=max_len-1, padding='pre')
 
     preds = model.predict(sequence, verbose=0)
-    predicted_index = np.argmax(preds)
+    predicted_index = np.argmax(preds) +1
 
     for word, index in tokenizer.word_index.items():
         if index == predicted_index:
