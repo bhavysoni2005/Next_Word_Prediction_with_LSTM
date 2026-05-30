@@ -23,7 +23,7 @@ def load_resources():
         st.info(f"TensorFlow Version: {tf.__version__}")
 
         model = load_model(
-            "lstm_model.h5",
+            "lstm_model.keras",
             compile=False
         )
 
